@@ -1,0 +1,140 @@
+﻿@model List<VeniteckSolutionsMVC.Models.UserDTO>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users List</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f7fc;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        h2 {
+            text-align: center;
+            color: #007bff;
+            margin-top: 20px;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+            table th,
+            table td {
+                padding: 12px;
+                text-align: left;
+                border-bottom: 1px solid #ddd;
+            }
+
+            table th {
+                background-color: #007bff;
+                color: white;
+                font-weight: bold;
+            }
+
+            table tbody tr:hover {
+                background-color: #f1f1f1;
+            }
+
+            table a {
+                padding: 6px 12px;
+                text-decoration: none;
+                color: #fff;
+                background-color: #007bff;
+                border-radius: 4px;
+                margin-right: 8px;
+                transition: background-color 0.3s;
+            }
+
+                table a:hover {
+                    background-color: #0056b3;
+                }
+
+        .no-users-message {
+            text-align: center;
+            font-size: 18px;
+            color: #999;
+        }
+
+        .btn-add-user {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            text-align: center;
+            background-color: #28a745;
+            color: white;
+            font-size: 16px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+            .btn-add-user:hover {
+                background-color: #218838;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Users</h2>
+
+        <a href="@Url.Action("InsertUser", "User")" class="btn-add-user">Add New User</a>
+
+        @if (Model != null && Model.Any())
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Mobile Number</th>
+                        <th>Gender</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>@user.Name</td>
+                            <td>@user.Email</td>
+                            <td>@user.MobileNumber</td>
+                            <td>@user.Gender</td>
+                            <td>
+
+                                <a href="@Url.Action("UpdateUser", "User")">Edit</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+        else
+        {
+            <p class="no-users-message">No users available.</p>
+        }
+    </div>
+</body>
+</html>
